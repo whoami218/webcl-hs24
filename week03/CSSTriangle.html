@@ -6,8 +6,16 @@
     <style>
 
         #one {
-            background-color: blue;
-            width:            100px; /* for experiments only */
+            width:                  0;
+            aspect-ratio:           1 / 1;
+            border-style:           solid;
+            --triangle-size:        100px;
+            --triangle-side-size:   calc(var(--triangle-size) / 2);
+            border-width:           var(--triangle-size)
+                                    var(--triangle-side-size)
+                                    0
+                                    var(--triangle-side-size);
+            border-color:     blue transparent transparent transparent ;
         }
         #two {
             background-color: red;
