@@ -40,10 +40,15 @@ const personListItemProjector = (masterController, selectionController, rootElem
     deleteButton.innerHTML  = "&times;";
     deleteButton.onclick    = _ => masterController.removePerson(person);
 
-    const firstnameInputElement = null; // todo create the input fields and bind to the attribute props
-    const lastnameInputElement  = null;
+    const firstnameInputElement = document.createElement("Input"); // todo create the input fields and bind to the attribute props
+    bindTextInput(person.firstname, firstnameInputElement); // todo create the input fields and bind to the attribute props
+
+    const lastnameInputElement = document.createElement("Input"); // todo create the input fields and bind to the attribute props
+    bindTextInput(person.lastname, lastnameInputElement); // todo create the input fields and bind to the attribute props
 
     // todo: when a line in the master view is clicked, we have to set the selection
+    firstnameInputElement.onclick = _ => selectionController.setSelectedPerson(person);
+    lastnameInputElement .onclick = _ => selectionController.setSelectedPerson(person);
 
     selectionController.onPersonSelected(
         selected => selected === person
@@ -57,6 +62,7 @@ const personListItemProjector = (masterController, selectionController, rootElem
         rootElement.removeChild(firstnameInputElement);
         rootElement.removeChild(lastnameInputElement);
         // todo: what to do with selection when person was removed?
+        selectionController.clearSelection();
         removeMe();
     } );
 
@@ -64,6 +70,7 @@ const personListItemProjector = (masterController, selectionController, rootElem
     rootElement.appendChild(firstnameInputElement);
     rootElement.appendChild(lastnameInputElement);
     // todo: what to do with selection when person was added?
+    selectionController.setSelectedPerson(person);
 };
 
 const personFormProjector = (detailController, rootElement, person) => {
@@ -80,6 +87,8 @@ const personFormProjector = (detailController, rootElement, person) => {
     </FORM>`;
 
     // todo: bind text values
+    bindTextInput(person.firstname, divElement.querySelector("#firstname"));
+    bindTextInput(person.lastname,  divElement.querySelector("#lastname"));
 
     // todo: bind label values
 
