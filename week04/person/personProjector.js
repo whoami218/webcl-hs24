@@ -1,4 +1,4 @@
-import {VALUE, VALID, EDITABLE, LABEL} from "../kolibri/presentationModel.js";
+import {EDITABLE, LABEL, VALID, VALUE} from "../kolibri/presentationModel.js";
 
 export { personListItemProjector, personFormProjector }
 
@@ -19,6 +19,9 @@ const bindTextInput = (textAttr, inputElement) => {
         : inputElement.setAttribute("readonly", true));
 
     // todo: the label property should be shown as a pop-over on the text element.
+    textAttr.getObs(LABEL).onChange(
+      label => inputElement.setAttribute("title", label)
+    );
 
 };
 
@@ -41,9 +44,11 @@ const personListItemProjector = (masterController, selectionController, rootElem
     deleteButton.onclick    = _ => masterController.removePerson(person);
 
     const firstnameInputElement = document.createElement("Input"); // todo create the input fields and bind to the attribute props
+    firstnameInputElement.setAttribute("type","text");
     bindTextInput(person.firstname, firstnameInputElement); // todo create the input fields and bind to the attribute props
 
     const lastnameInputElement = document.createElement("Input"); // todo create the input fields and bind to the attribute props
+    lastnameInputElement.setAttribute("type","text");
     bindTextInput(person.lastname, lastnameInputElement); // todo create the input fields and bind to the attribute props
 
     // todo: when a line in the master view is clicked, we have to set the selection
@@ -91,6 +96,13 @@ const personFormProjector = (detailController, rootElement, person) => {
     bindTextInput(person.lastname,  divElement.querySelector("#lastname"));
 
     // todo: bind label values
+    person.firstname.getObs(LABEL).onChange(
+        label => divElement.querySelector("label[for=firstname]").textContent = label
+    );
+    person.lastname.getObs(LABEL).onChange(
+        label => divElement.querySelector("label[for=lastname]").textContent = label
+    );
+
 
     rootElement.firstChild.replaceWith(divElement); // react - style ;-)
 };
