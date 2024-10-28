@@ -25,6 +25,12 @@ const bindTextInput = (textAttr, inputElement) => {
 };
 
 const personListItemProjector = (masterController, selectionController, rootElement, person) => {
+    let tableElement = rootElement.getElementsByTagName("table")[0];
+    if (!tableElement) {
+        tableElement = document.createElement("table");
+        rootElement.appendChild(tableElement);
+    }
+
     const deleteButton = document.createElement("Button");
     deleteButton.setAttribute("class","delete");
     deleteButton.innerHTML  = "&times;";
@@ -60,8 +66,7 @@ const personListItemProjector = (masterController, selectionController, rootElem
     newRow.appendChild(firstnameInputElement);
     newRow.appendChild(lastnameInputElement);
 
-    rootElement.appendChild(newRow);
-
+    tableElement.appendChild(newRow);
 }
 
 const personFormProjector = (detailController, rootElement, person) => {
