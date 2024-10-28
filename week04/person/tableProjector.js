@@ -56,7 +56,7 @@ const personListItemProjector = (masterController, selectionController, rootElem
 
     masterController.onPersonRemove( (removedPerson, removeMe) => {
         if (removedPerson !== person) return;
-        rootElement.removeChild(newRow);
+        tableElement.removeChild(newRow);
         selectionController.clearSelection();
         removeMe();
     } );
