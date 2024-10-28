@@ -44,8 +44,8 @@ const personListItemProjector = (masterController, selectionController, rootElem
 
     selectionController.onPersonSelected(
         selected => selected === person
-            ? deleteButton.classList.add("selected")
-            : deleteButton.classList.remove("selected")
+            ? newRow.classList.add("selected")
+            : newRow.classList.remove("selected")
     );
 
     masterController.onPersonRemove( (removedPerson, removeMe) => {
