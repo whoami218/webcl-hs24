@@ -44,7 +44,7 @@ const personListItemProjector = (masterController, selectionController, rootElem
     lastnameInputElement.setAttribute("type", "text");
 
     firstnameInputElement.onclick = _ => selectionController.setSelectedPerson(person);
-    lastnameInputElement.onclick = _ => selectionController.setSelectedPerson(person);
+    lastnameInputElement .onclick = _ => selectionController.setSelectedPerson(person);
 
     const newRow = document.createElement("tr");
 
@@ -82,7 +82,7 @@ const personFormProjector = (detailController, rootElement, person) => {
         </tr>
     `;
     bindTextInput(person.firstname, tableElement.querySelector("#first-name"));
-    bindTextInput(person.lastname, tableElement.querySelector("#last-name"));
+    bindTextInput(person.lastname , tableElement.querySelector("#last-name"));
 
     rootElement.firstChild.replaceWith(tableElement);
 }
