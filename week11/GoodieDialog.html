@@ -15,9 +15,10 @@
         }
 
         dialog {
+            max-width: 10em;
             border-width: .5px;
             box-shadow: .5em .5em .5em .2em black;
-            border-radius: .2em;
+            /*border-radius: .2em;*/
             /*border-top-left-radius:     50% 30%;*/
             /*border-top-right-radius:    30% 50% ;*/
             /*border-bottom-right-radius: 50% 30%;*/
@@ -26,31 +27,33 @@
             /*               30% 50% 30% 50%;*/
 
 
-            /*opacity: 0;*/
-            /*transform: scaleY(0);*/
-            /*transition:*/
-            /*  opacity 0.7s ease-out,*/
-            /*  transform 0.7s ease-out,*/
-            /*  overlay 0.7s ease-out allow-discrete,*/
-            /*  display 0.7s ease-out allow-discrete;*/
+            opacity: 0;
+            transform: scaleY(0) rotate(0);
+
+            transition:
+              opacity   2.7s ease-out,
+              transform 0.7s ease-out;
+              /*overlay 0.7s ease-out allow-discrete,*/
+              /*display 0.7s ease-out allow-discrete;*/
 
         }
-        /*dialog[open] {*/
-        /*  opacity: 1;*/
-        /*  transform: scaleY(1);*/
-        /*}*/
+        dialog[open] {
+          opacity: 1;
+          transform: scaleY(1) rotate(360deg);
+        }
         dialog::backdrop {
-            background-color: #00000010;
+            inset: 50px;
+            background-color: #FF000010;
             /*filter: blur(5px);*/
             backdrop-filter: blur(1px);
         }
 
-        /*@starting-style {*/
-        /*  dialog[open] {*/
-        /*    opacity: 0;*/
-        /*    transform: scaleY(0);*/
-        /*  }*/
-        /*}*/
+        @starting-style {
+          dialog[open] {
+            opacity: 0;
+            transform: scaleY(0) rotate(0);
+          }
+        }
 
 
     </style>
@@ -59,7 +62,7 @@
 
 <main>
 
-    <dialog id="favDialog">
+    <dialog id="favDialog" >
       <form method="dialog">
         <p><label>My favorite module is:
           <select>
